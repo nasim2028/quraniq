@@ -35,7 +35,8 @@ export default function VerseSearch() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setSubmission({ loading: true, data: null, error: null });
     try {
-      const result = await searchVerse(values);
+      const lang = document.documentElement.lang || 'en';
+      const result = await searchVerse({ query: values.query, language: lang });
       setSubmission({ loading: false, data: result, error: null });
     } catch (error) {
       console.error(error);

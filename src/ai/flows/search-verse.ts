@@ -13,6 +13,7 @@ import {z} from 'genkit';
 
 const SearchVerseInputSchema = z.object({
   query: z.string().describe('The keyword or topic to search for in the Quran.'),
+  language: z.string().describe("The language of the user's request, e.g., 'English', 'Bengali', 'Arabic'."),
 });
 export type SearchVerseInput = z.infer<typeof SearchVerseInputSchema>;
 
@@ -37,6 +38,8 @@ const prompt = ai.definePrompt({
 Query: {{{query}}}
 
 Return the verses and a summary of the verses found.
+
+IMPORTANT: You must respond in the same language as the user's request, which is {{{language}}}.
 `,config: {
     safetySettings: [
       {

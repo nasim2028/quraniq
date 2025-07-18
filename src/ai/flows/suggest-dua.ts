@@ -15,6 +15,7 @@ const SuggestDuaInputSchema = z.object({
   situation: z
     .string()
     .describe("The user's current situation or need for which a Dua is requested."),
+  language: z.string().describe("The language of the user's request, e.g., 'English', 'Bengali', 'Arabic'."),
 });
 export type SuggestDuaInput = z.infer<typeof SuggestDuaInputSchema>;
 
@@ -37,6 +38,8 @@ const prompt = ai.definePrompt({
   prompt: `You are an Islamic scholar specializing in recommending appropriate duas (supplications) for various situations.
 
   Based on the user's current situation or need, suggest a relevant Dua and explain its relevance.
+  
+  IMPORTANT: You must respond in the same language as the user's request, which is {{{language}}}.
 
   Situation: {{{situation}}}`,
 });

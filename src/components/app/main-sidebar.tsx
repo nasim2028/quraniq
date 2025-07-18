@@ -25,7 +25,15 @@ const menuItems = [
 
 export function MainSidebar() {
   const pathname = usePathname();
-  const { isMobile, toggleSidebar, openMobile, setOpenMobile } = useSidebar();
+  const { isMobile, open: sidebarOpen, setOpen: setSidebarOpen, openMobile, setOpenMobile } = useSidebar();
+
+  const toggleSidebar = () => {
+    if (isMobile) {
+      setOpenMobile(!openMobile);
+    } else {
+      setSidebarOpen(!sidebarOpen);
+    }
+  };
 
   const sidebarContent = (
     <>
@@ -60,7 +68,7 @@ export function MainSidebar() {
     <>
       {isMobile ? (
         <>
-          <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm border-b">
+          <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm border-b md:hidden">
             <div className="container flex h-14 items-center">
               <Button
                 variant="ghost"

@@ -25,15 +25,7 @@ const menuItems = [
 
 export function MainSidebar() {
   const pathname = usePathname();
-  const { isMobile, open: sidebarOpen, setOpen: setSidebarOpen, openMobile, setOpenMobile } = useSidebar();
-
-  const toggleSidebar = () => {
-    if (isMobile) {
-      setOpenMobile(!openMobile);
-    } else {
-      setSidebarOpen(!sidebarOpen);
-    }
-  };
+  const { isMobile, openMobile, setOpenMobile } = useSidebar();
 
   const sidebarContent = (
     <>
@@ -64,37 +56,37 @@ export function MainSidebar() {
     </>
   );
 
+  if (isMobile) {
+    return (
+      <>
+        <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm border-b md:hidden">
+          <div className="container flex h-14 items-center">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setOpenMobile(true)}
+              className="mr-2"
+            >
+              <Menu className="h-6 w-6" />
+              <span className="sr-only">Toggle Sidebar</span>
+            </Button>
+            <Logo />
+          </div>
+        </header>
+        <Sheet open={openMobile} onOpenChange={setOpenMobile}>
+          <SheetContent side="left" className="p-0 w-72 flex flex-col">
+              <Sidebar className="flex h-full" collapsible="none">
+                  {sidebarContent}
+              </Sidebar>
+          </SheetContent>
+        </Sheet>
+      </>
+    )
+  }
+
   return (
-    <>
-      {isMobile ? (
-        <>
-          <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm border-b md:hidden">
-            <div className="container flex h-14 items-center">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleSidebar}
-                className="mr-2"
-              >
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle Sidebar</span>
-              </Button>
-              <Logo />
-            </div>
-          </header>
-          <Sheet open={openMobile} onOpenChange={setOpenMobile}>
-            <SheetContent side="left" className="p-0 w-72">
-                <Sidebar className="flex" collapsible="none">
-                    {sidebarContent}
-                </Sidebar>
-            </SheetContent>
-          </Sheet>
-        </>
-      ) : (
-        <Sidebar collapsible="icon" className="hidden md:flex">
-          {sidebarContent}
-        </Sidebar>
-      )}
-    </>
+    <Sidebar collapsible="icon" className="hidden md:flex">
+      {sidebarContent}
+    </Sidebar>
   );
 }

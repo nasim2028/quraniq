@@ -7,7 +7,6 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarTrigger,
   useSidebar,
 } from '@/components/ui/sidebar';
 import { Logo } from '@/components/app/logo';
@@ -31,10 +30,7 @@ export function MainSidebar() {
   const sidebarContent = (
     <>
       <SidebarHeader>
-        <div className="flex items-center justify-between">
-            <Logo />
-            <SidebarTrigger className="hidden group-data-[collapsible=icon]:flex" />
-        </div>
+        <Logo />
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
@@ -76,7 +72,7 @@ export function MainSidebar() {
         </header>
         <Sheet open={openMobile} onOpenChange={setOpenMobile}>
           <SheetContent side="left" className="p-0 w-72 flex flex-col">
-              <Sidebar className="flex h-full" collapsible="none">
+              <Sidebar className="flex h-full border-0" collapsible="none">
                   {sidebarContent}
               </Sidebar>
           </SheetContent>

@@ -57,7 +57,7 @@ export function MainSidebar() {
     return (
       <>
         <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm border-b md:hidden">
-          <div className="container flex h-14 items-center">
+          <div className="container flex h-14 items-center px-4">
             <Button
               variant="ghost"
               size="icon"

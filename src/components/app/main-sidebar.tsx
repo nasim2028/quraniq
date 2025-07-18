@@ -11,7 +11,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { Logo } from '@/components/app/logo';
-import { Home, Search, BookHeart, Menu } from 'lucide-react';
+import { Home, Search, BookHeart, Menu, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
@@ -19,6 +19,7 @@ import { Sheet, SheetContent } from '../ui/sheet';
 
 const menuItems = [
   { href: '/', label: 'Home', icon: Home },
+  { href: '/features', label: 'Features', icon: Sparkles },
   { href: '/search', label: 'Verse Search', icon: Search },
   { href: '/dua', label: 'Dua Suggestion', icon: BookHeart },
 ];

@@ -6,7 +6,7 @@ import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { MainSidebar } from '@/components/app/main-sidebar';
 
 export const metadata: Metadata = {
-  title: 'NoorAI',
+  title: 'Quraniq',
   description: 'An AI-powered Islamic resource.',
 };
 

@@ -13,7 +13,7 @@ export function Logo({ className }: { className?: string }) {
     <div className={cn("flex items-center gap-2", className)}>
       <StarIcon className="text-primary h-6 w-6" />
       <span className="text-xl font-bold font-headline text-foreground">
-        NoorAI
+        Quraniq
       </span>
     </div>
   );

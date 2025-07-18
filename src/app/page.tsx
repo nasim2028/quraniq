@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="space-y-8">
       <header className="space-y-2">
-        <h1 className="text-4xl font-bold font-headline tracking-tight text-primary">Welcome to NoorAI</h1>
+        <h1 className="text-4xl font-bold font-headline tracking-tight text-primary">Welcome to Quraniq</h1>
         <p className="text-lg text-muted-foreground">
           Your AI-powered companion for Islamic knowledge and spiritual growth.
         </p>

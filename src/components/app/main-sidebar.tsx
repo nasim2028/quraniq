@@ -15,6 +15,7 @@ import { Home, Search, BookHeart, Menu } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
+import { Sheet, SheetContent } from '../ui/sheet';
 
 const menuItems = [
   { href: '/', label: 'Home', icon: Home },
@@ -24,7 +25,7 @@ const menuItems = [
 
 export function MainSidebar() {
   const pathname = usePathname();
-  const { isMobile, toggleSidebar } = useSidebar();
+  const { isMobile, toggleSidebar, openMobile, setOpenMobile } = useSidebar();
 
   const sidebarContent = (
     <>
@@ -57,10 +58,11 @@ export function MainSidebar() {
 
   return (
     <>
-      {isMobile && (
-         <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm border-b">
-           <div className="container flex h-14 items-center">
-             <Button
+      {isMobile ? (
+        <>
+          <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm border-b">
+            <div className="container flex h-14 items-center">
+              <Button
                 variant="ghost"
                 size="icon"
                 onClick={toggleSidebar}
@@ -69,13 +71,22 @@ export function MainSidebar() {
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Toggle Sidebar</span>
               </Button>
-             <Logo />
-           </div>
-         </header>
+              <Logo />
+            </div>
+          </header>
+          <Sheet open={openMobile} onOpenChange={setOpenMobile}>
+            <SheetContent side="left" className="p-0 w-72">
+                <Sidebar className="flex" collapsible="none">
+                    {sidebarContent}
+                </Sidebar>
+            </SheetContent>
+          </Sheet>
+        </>
+      ) : (
+        <Sidebar collapsible="icon" className="hidden md:flex">
+          {sidebarContent}
+        </Sidebar>
       )}
-      <Sidebar collapsible="icon" className="hidden md:flex">
-        {sidebarContent}
-      </Sidebar>
     </>
   );
 }

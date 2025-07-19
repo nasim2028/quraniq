@@ -1,16 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { RotateCcw, ChevronDown } from 'lucide-react';
 import { zikrList, type Zikr } from '@/lib/zikr-data';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '../ui/separator';
 
+const categories = [...new Set(zikrList.map(item => item.category))];
+
 export default function TasbeehCounter() {
-  const [selectedZikr, setSelectedZikr] = useState<Zikr>(zikrList[0]);
+  const [selectedCategory, setSelectedCategory] = useState<string>(categories[0]);
+  const [selectedZikr, setSelectedZikr] = useState<Zikr>(zikrList.filter(z => z.category === categories[0])[0]);
   const [count, setCount] = useState(0);
+
+  const filteredZikrList = useMemo(() => {
+    return zikrList.filter(zikr => zikr.category === selectedCategory);
+  }, [selectedCategory]);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    const firstZikrInNewCategory = zikrList.find(zikr => zikr.category === category);
+    if (firstZikrInNewCategory) {
+      handleZikrSelect(firstZikrInNewCategory);
+    }
+  };
 
   const handleZikrSelect = (zikr: Zikr) => {
     setSelectedZikr(zikr);
@@ -32,23 +47,32 @@ export default function TasbeehCounter() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <div className="flex justify-between items-center">
-          <CardTitle className="font-headline text-2xl text-primary">Tasbeeh</CardTitle>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline">
-                Choose Zikr
-                <ChevronDown className="ml-2 h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-64">
-              {zikrList.map((zikr) => (
-                <DropdownMenuItem key={zikr.id} onClick={() => handleZikrSelect(zikr)}>
-                  {zikr.transliteration}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+        <div className="flex justify-between items-center gap-2">
+            <Select onValueChange={handleCategoryChange} defaultValue={selectedCategory}>
+              <SelectTrigger>
+                <SelectValue placeholder="Choose Category" />
+              </SelectTrigger>
+              <SelectContent>
+                {categories.map((category) => (
+                  <SelectItem key={category} value={category}>
+                    {category}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Select onValueChange={(zikrId) => handleZikrSelect(zikrList.find(z => z.id.toString() === zikrId)!)} value={selectedZikr.id.toString()}>
+              <SelectTrigger>
+                <SelectValue placeholder="Choose Zikr" />
+              </SelectTrigger>
+              <SelectContent>
+                  {filteredZikrList.map((zikr) => (
+                    <SelectItem key={zikr.id} value={zikr.id.toString()}>
+                      {zikr.transliteration}
+                    </SelectItem>
+                  ))}
+              </SelectContent>
+            </Select>
         </div>
         <CardDescription>Selected Zikr: {selectedZikr.transliteration}</CardDescription>
       </CardHeader>

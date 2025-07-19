@@ -11,10 +11,15 @@ export default function NamesOfAllahList() {
             <CardTitle className="font-headline text-2xl text-primary">{name.transliteration}</CardTitle>
             <p className="text-3xl font-bold text-right font-headline">{name.name}</p>
           </CardHeader>
-          <CardContent className="flex-grow space-y-2">
-            <p className="text-base text-muted-foreground">{name.meaning}</p>
+          <CardContent className="flex-grow space-y-3">
+            <div>
+                <p className="text-base font-medium">{name.bengaliMeaning}</p>
+                <p className="text-sm text-muted-foreground">{name.meaning}</p>
+            </div>
             <Separator />
-            <p className="text-base font-medium">{name.bengaliMeaning}</p>
+            <p className="text-base text-muted-foreground italic leading-relaxed">
+              "{name.explanation}"
+            </p>
           </CardContent>
         </Card>
       ))}

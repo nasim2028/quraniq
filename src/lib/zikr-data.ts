@@ -15,7 +15,7 @@ export const zikrList: Zikr[] = [
         transliteration: "SubhanAllah",
         translation: "Glory be to Allah",
         bengaliMeaning: "আল্লাহ পবিত্র",
-        virtue: "Whoever says 'SubhanAllah' 100 times, 1000 good deeds are recorded for him, and 1000 bad deeds are wiped away.",
+        virtue: "যে ব্যক্তি ১০০ বার 'সুবহানাল্লাহ' পাঠ করবে, তার জন্য ১০০০ নেকি লেখা হবে এবং ১০০০ গুনাহ মুছে ফেলা হবে।",
         target: 33,
     },
     {
@@ -24,7 +24,7 @@ export const zikrList: Zikr[] = [
         transliteration: "Alhamdulillah",
         translation: "Praise be to Allah",
         bengaliMeaning: "সমস্ত প্রশংসা আল্লাহর",
-        virtue: "'Alhamdulillah' fills the scale, and 'SubhanAllah' and 'Alhamdulillah' fill up what is between the heavens and the earth.",
+        virtue: "'আলহামদুলিল্লাহ' весов (মিজান) পূর্ণ করে দেয় এবং 'সুবহানাল্লাহ' ও 'আলহামদুলিল্লাহ' আসমান ও জমিনের মধ্যবর্তী স্থান পূর্ণ করে দেয়।",
         target: 33,
     },
     {
@@ -33,7 +33,7 @@ export const zikrList: Zikr[] = [
         transliteration: "Allahu Akbar",
         translation: "Allah is the Greatest",
         bengaliMeaning: "আল্লাহ সর্বশ্রেষ্ঠ",
-        virtue: "The most beloved words to Allah are four: SubhanAllah, Alhamdulillah, La ilaha illallah, and Allahu Akbar.",
+        virtue: "আল্লাহর কাছে সবচেয়ে প্রিয় চারটি বাক্য হলো: সুবহানাল্লাহ, আলহামদুলিল্লাহ, লা ইলাহা ইল্লাল্লাহ এবং আল্লাহু আকবার।",
         target: 34,
     },
     {
@@ -42,7 +42,7 @@ export const zikrList: Zikr[] = [
         transliteration: "La ilaha illallah",
         translation: "There is no god but Allah",
         bengaliMeaning: "আল্লাহ ছাড়া কোন ইলাহ নেই",
-        virtue: "The best remembrance is 'La ilaha illallah,' and the best supplication is 'Alhamdulillah.'",
+        virtue: "সর্বশ্রেষ্ঠ জিকির হলো 'লা ইলাহা ইল্লাল্লাহ' এবং সর্বশ্রেষ্ঠ দোয়া হলো 'আলহামদুলিল্লাহ'।" ,
         target: 100,
     },
     {
@@ -51,7 +51,7 @@ export const zikrList: Zikr[] = [
         transliteration: "Astaghfirullah",
         translation: "I seek forgiveness from Allah",
         bengaliMeaning: "আমি আল্লাহর কাছে ক্ষমা চাই",
-        virtue: "Whoever constantly seeks forgiveness, Allah will appoint for him a way out of every distress and a relief from every anxiety.",
+        virtue: "যে ব্যক্তি নিয়মিত ইস্তেগফার করে, আল্লাহ তাকে সকল সংকট থেকে উত্তরণের পথ বের করে দেন এবং সকল দুশ্চিন্তা থেকে মুক্তি দেন।",
         target: 100,
     },
 ];

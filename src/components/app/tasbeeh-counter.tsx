@@ -1,36 +1,90 @@
+
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { RotateCcw, ChevronDown } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from '@/components/ui/card';
+import { RotateCcw, Heart } from 'lucide-react';
 import { zikrList, type Zikr } from '@/lib/zikr-data';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '../ui/separator';
+import { cn } from '@/lib/utils';
 
-const categories = [...new Set(zikrList.map(item => item.category))];
+const allCategories = ["প্রিয়", ...new Set(zikrList.map(item => item.category))];
 
 export default function TasbeehCounter() {
-  const [selectedCategory, setSelectedCategory] = useState<string>(categories[0]);
-  const [selectedZikr, setSelectedZikr] = useState<Zikr>(zikrList.filter(z => z.category === categories[0])[0]);
+  const [favorites, setFavorites] = useState<number[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>(allCategories[1]);
+  const [selectedZikr, setSelectedZikr] = useState<Zikr>(zikrList.filter(z => z.category === allCategories[1])[0]);
   const [count, setCount] = useState(0);
 
+  useEffect(() => {
+    try {
+      const storedFavorites = localStorage.getItem('favoriteZikrs');
+      if (storedFavorites) {
+        setFavorites(JSON.parse(storedFavorites));
+      }
+    } catch (error) {
+      console.error("Failed to parse favorites from localStorage", error);
+      setFavorites([]);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('favoriteZikrs', JSON.stringify(favorites));
+    } catch (error) {
+      console.error("Failed to save favorites to localStorage", error);
+    }
+  }, [favorites]);
+
+  const favoriteZikrList = useMemo(() => {
+    return zikrList.filter(zikr => favorites.includes(zikr.id));
+  }, [favorites]);
+
   const filteredZikrList = useMemo(() => {
+    if (selectedCategory === "প্রিয়") {
+      return favoriteZikrList.length > 0 ? favoriteZikrList : [];
+    }
     return zikrList.filter(zikr => zikr.category === selectedCategory);
-  }, [selectedCategory]);
+  }, [selectedCategory, favoriteZikrList]);
+  
+  useEffect(() => {
+    if (filteredZikrList.length > 0) {
+        if (!filteredZikrList.find(z => z.id === selectedZikr.id)) {
+            handleZikrSelect(filteredZikrList[0]);
+        }
+    } else if (selectedCategory === "প্রিয়") {
+        const fallbackCategory = allCategories.find(c => c !== "প্রিয়");
+        if(fallbackCategory) {
+            setSelectedCategory(fallbackCategory);
+        }
+    }
+  }, [filteredZikrList, selectedZikr]);
+
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
-    const firstZikrInNewCategory = zikrList.find(zikr => zikr.category === category);
-    if (firstZikrInNewCategory) {
-      handleZikrSelect(firstZikrInNewCategory);
+    const list = category === "প্রিয়" ? favoriteZikrList : zikrList.filter(zikr => zikr.category === category);
+    if (list.length > 0) {
+      handleZikrSelect(list[0]);
     }
   };
 
   const handleZikrSelect = (zikr: Zikr) => {
     setSelectedZikr(zikr);
-    setCount(0); // Reset count when a new zikr is selected
+    setCount(0);
   };
+
+  const toggleFavorite = (zikrId: number) => {
+    setFavorites(prev => 
+      prev.includes(zikrId) 
+        ? prev.filter(id => id !== zikrId) 
+        : [...prev, zikrId]
+    );
+  };
+
+  const isFavorite = (zikrId: number) => favorites.includes(zikrId);
 
   const incrementCount = () => {
     if (count < selectedZikr.target) {
@@ -48,22 +102,22 @@ export default function TasbeehCounter() {
     <Card className="w-full max-w-md">
       <CardHeader>
         <div className="flex justify-between items-center gap-2">
-            <Select onValueChange={handleCategoryChange} defaultValue={selectedCategory}>
-              <SelectTrigger>
+            <Select onValueChange={handleCategoryChange} value={selectedCategory}>
+              <SelectTrigger className="w-1/3">
                 <SelectValue placeholder="Choose Category" />
               </SelectTrigger>
               <SelectContent>
-                {categories.map((category) => (
-                  <SelectItem key={category} value={category}>
+                {allCategories.map((category) => (
+                  <SelectItem key={category} value={category} disabled={category === "প্রিয়" && favoriteZikrList.length === 0}>
                     {category}
                   </SelectItem>
                 ))}
               </SelectContent>
             </Select>
 
-            <Select onValueChange={(zikrId) => handleZikrSelect(zikrList.find(z => z.id.toString() === zikrId)!)} value={selectedZikr.id.toString()}>
-              <SelectTrigger>
-                <SelectValue placeholder="Choose Zikr" />
+            <Select onValueChange={(zikrId) => handleZikrSelect(zikrList.find(z => z.id.toString() === zikrId)!)} value={selectedZikr.id.toString()} disabled={filteredZikrList.length === 0}>
+              <SelectTrigger className="flex-grow">
+                <SelectValue placeholder={filteredZikrList.length > 0 ? "Choose Zikr" : "No Zikr in category"} />
               </SelectTrigger>
               <SelectContent>
                   {filteredZikrList.map((zikr) => (
@@ -73,6 +127,10 @@ export default function TasbeehCounter() {
                   ))}
               </SelectContent>
             </Select>
+            
+            <Button variant="ghost" size="icon" onClick={() => toggleFavorite(selectedZikr.id)} aria-label="Toggle Favorite">
+                <Heart className={cn("h-5 w-5", isFavorite(selectedZikr.id) ? "fill-red-500 text-red-500" : "text-muted-foreground")} />
+            </Button>
         </div>
         <CardDescription>Selected Zikr: {selectedZikr.transliteration}</CardDescription>
       </CardHeader>
@@ -90,7 +148,7 @@ export default function TasbeehCounter() {
           />
           <div className="z-10 text-center">
             <span className="text-5xl font-bold font-mono text-primary">{count}</span>
-            <span className="text-lg font-mono text-primary-foreground">/ {selectedZikr.target}</span>
+            <span className="text-lg font-mono text-muted-foreground">/ {selectedZikr.target}</span>
           </div>
         </div>
         <Button 

@@ -17,8 +17,8 @@ export default function NamesOfAllahList() {
                 <p className="text-sm text-muted-foreground">{name.meaning}</p>
             </div>
             <Separator />
-            <p className="text-base text-muted-foreground italic leading-relaxed">
-              "{name.explanation}"
+            <p className="text-base text-muted-foreground leading-relaxed">
+              {name.explanation}
             </p>
           </CardContent>
         </Card>

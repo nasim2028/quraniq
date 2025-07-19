@@ -1,6 +1,5 @@
 import DailyHadith from "@/components/app/daily-hadith";
-import PrayerTimes from "@/components/app/prayer-times";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import FeaturesList from "@/components/app/features-list";
 
 export default function Home() {
   return (
@@ -17,7 +16,7 @@ export default function Home() {
           <DailyHadith />
         </div>
         <div>
-          <PrayerTimes />
+          <FeaturesList />
         </div>
       </main>
     </div>

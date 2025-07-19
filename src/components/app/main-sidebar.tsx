@@ -10,11 +10,11 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { Logo } from '@/components/app/logo';
-import { Home, Search, BookHeart, Menu, Sparkles, Gem } from 'lucide-react';
+import { Home, Search, BookHeart, Menu, Sparkles, Gem, Clock } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
-import { Sheet, SheetContent } from '../ui/sheet';
+import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 
 const menuItems = [
   { href: '/', label: 'Home', icon: Home },
@@ -22,6 +22,7 @@ const menuItems = [
   { href: '/search', label: 'Verse Search', icon: Search },
   { href: '/dua', label: 'Dua Suggestion', icon: BookHeart },
   { href: '/tasbeeh', label: 'Tasbeeh Counter', icon: Gem },
+  { href: '/prayer-times', label: 'Prayer Times', icon: Clock },
 ];
 
 export function MainSidebar() {
@@ -59,25 +60,26 @@ export function MainSidebar() {
       <>
         <header className="sticky top-0 z-40 w-full bg-background/80 backdrop-blur-sm border-b md:hidden">
           <div className="container flex h-14 items-center px-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setOpenMobile(true)}
-              className="mr-2"
-            >
-              <Menu className="h-6 w-6" />
-              <span className="sr-only">Toggle Sidebar</span>
-            </Button>
+             <Sheet open={openMobile} onOpenChange={setOpenMobile}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="mr-2"
+                >
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Toggle Sidebar</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="p-0 w-72 flex flex-col">
+                  <Sidebar className="flex h-full border-0" collapsible="none">
+                      {sidebarContent}
+                  </Sidebar>
+              </SheetContent>
+            </Sheet>
             <Logo />
           </div>
         </header>
-        <Sheet open={openMobile} onOpenChange={setOpenMobile}>
-          <SheetContent side="left" className="p-0 w-72 flex flex-col">
-              <Sidebar className="flex h-full border-0" collapsible="none">
-                  {sidebarContent}
-              </Sidebar>
-          </SheetContent>
-        </Sheet>
       </>
     )
   }

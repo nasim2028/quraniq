@@ -79,6 +79,7 @@ export default function TasbeehCounter() {
         </Button>
          <Card className="w-full bg-secondary/50 p-4 mt-4">
           <p className="text-center font-bold text-lg font-arabic">{selectedZikr.arabic}</p>
+          <p className="text-center text-sm font-medium">{selectedZikr.bengaliMeaning}</p>
           <p className="text-center text-sm text-muted-foreground">{selectedZikr.translation}</p>
           <Separator className="my-2"/>
           <p className="text-xs text-center italic">"{selectedZikr.virtue}"</p>

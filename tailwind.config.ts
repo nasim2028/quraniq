@@ -20,6 +20,7 @@ export default {
         body: ['Alegreya', 'serif'],
         headline: ['Belleza', 'sans-serif'],
         code: ['monospace'],
+        arabic: ['"Traditional Arabic"', 'serif'],
       },
       colors: {
         background: 'hsl(var(--background))',

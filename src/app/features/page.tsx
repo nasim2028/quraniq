@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookHeart, Search, BookOpenText, Clock, Gem, BookKey } from "lucide-react";
+import { BookHeart, Search, BookOpenText, Clock, Gem, BookKey, BookOpen } from "lucide-react";
 import type { ReactElement } from "react";
 import Link from "next/link";
 
@@ -11,6 +11,12 @@ type Feature = {
 };
 
 const featureList: Feature[] = [
+    {
+        icon: <BookOpen className="h-8 w-8 text-primary" />,
+        title: "Full Quran Reader",
+        description: "Read the entire Holy Quran with translations and explanations.",
+        href: "/quran",
+    },
     {
         icon: <BookHeart className="h-8 w-8 text-primary" />,
         title: "Dua Suggestions",

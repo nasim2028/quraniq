@@ -26,7 +26,7 @@ export default function RootLayout({
         <SidebarProvider>
           <MainSidebar />
           <SidebarInset>
-            <div className="min-h-screen p-4 md:p-8">
+            <div className="min-h-screen p-4 md:p-6">
               {children}
             </div>
           </SidebarInset>

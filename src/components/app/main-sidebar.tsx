@@ -10,7 +10,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { Logo } from '@/components/app/logo';
-import { Home, Search, BookHeart, Menu, Sparkles } from 'lucide-react';
+import { Home, Search, BookHeart, Menu, Sparkles, Gem } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
@@ -21,6 +21,7 @@ const menuItems = [
   { href: '/features', label: 'Features', icon: Sparkles },
   { href: '/search', label: 'Verse Search', icon: Search },
   { href: '/dua', label: 'Dua Suggestion', icon: BookHeart },
+  { href: '/tasbeeh', label: 'Tasbeeh Counter', icon: Gem },
 ];
 
 export function MainSidebar() {

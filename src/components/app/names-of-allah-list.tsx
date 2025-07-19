@@ -1,5 +1,6 @@
 import { namesOfAllah } from "@/lib/names-of-allah";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "../ui/separator";
 
 export default function NamesOfAllahList() {
   return (
@@ -10,8 +11,10 @@ export default function NamesOfAllahList() {
             <CardTitle className="font-headline text-2xl text-primary">{name.transliteration}</CardTitle>
             <p className="text-3xl font-bold text-right font-headline">{name.name}</p>
           </CardHeader>
-          <CardContent className="flex-grow">
+          <CardContent className="flex-grow space-y-2">
             <p className="text-base text-muted-foreground">{name.meaning}</p>
+            <Separator />
+            <p className="text-base font-medium">{name.bengaliMeaning}</p>
           </CardContent>
         </Card>
       ))}

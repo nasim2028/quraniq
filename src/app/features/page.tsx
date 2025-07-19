@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookHeart, Search, BookOpenText, Clock, Gem } from "lucide-react";
+import { BookHeart, Search, BookOpenText, Clock, Gem, BookKey } from "lucide-react";
 import type { ReactElement } from "react";
 import Link from "next/link";
 
@@ -40,6 +40,12 @@ const featureList: Feature[] = [
         title: "Tasbeeh Counter",
         description: "Use the digital tasbeeh to keep track of your zikr and supplications.",
         href: "/tasbeeh",
+    },
+    {
+        icon: <BookKey className="h-8 w-8 text-primary" />,
+        title: "99 Names of Allah",
+        description: "Explore the beautiful names of Allah with their meanings and transliterations.",
+        href: "/names-of-allah",
     },
 ];
 

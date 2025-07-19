@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookHeart, Search, BookOpenText, Clock, Gem } from "lucide-react";
+import { BookHeart, Search, BookOpenText, Clock, Gem, BookKey } from "lucide-react";
 import Link from "next/link";
 
 const featureList = [
@@ -27,6 +27,11 @@ const featureList = [
         icon: <Gem className="h-6 w-6 text-primary" />,
         title: "Tasbeeh Counter",
         href: "/tasbeeh",
+    },
+    {
+        icon: <BookKey className="h-6 w-6 text-primary" />,
+        title: "99 Names of Allah",
+        href: "/names-of-allah",
     }
 ];
 

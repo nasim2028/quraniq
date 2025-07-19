@@ -10,7 +10,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { Logo } from '@/components/app/logo';
-import { Home, Search, BookHeart, Menu, Sparkles, Gem, Clock } from 'lucide-react';
+import { Home, Search, BookHeart, Menu, Sparkles, Gem, Clock, BookKey } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
@@ -23,6 +23,7 @@ const menuItems = [
   { href: '/dua', label: 'Dua Suggestion', icon: BookHeart },
   { href: '/tasbeeh', label: 'Tasbeeh Counter', icon: Gem },
   { href: '/prayer-times', label: 'Prayer Times', icon: Clock },
+  { href: '/names-of-allah', label: '99 Names of Allah', icon: BookKey },
 ];
 
 export function MainSidebar() {
